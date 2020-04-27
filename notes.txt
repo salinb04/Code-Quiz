@@ -1,0 +1,28 @@
+** Global Items **
+  View High Scores
+  Timer Display
+  
+  1. Start 'Page'
+    - Header
+    - Paragraph
+    - Start Button
+
+  2. Question 'Page'
+    - Header - Question
+    - Collection Buttons - Answers
+
+    * Status: Feedback (Wrong / Right)
+    - Label
+
+  3. Leader Board Entry
+    - Header - All Done!
+    - Final Score
+    - Input field for name
+    - Button
+
+    ** Clicking input fields removed feedback label
+
+  4. High Scores *Global Elements Gone*
+    - List of Scores
+    - Restart Button
+    - Clear Highscores Button
