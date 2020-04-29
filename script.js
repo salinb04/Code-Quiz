@@ -8,6 +8,8 @@ var questionHeader = document.getElementById("question-header");
 var answerChoices = document.getElementById("answer-choices");
 var questionFeedback = document.getElementById("question-feedback");
 var mainContent = document.getElementById("main-content");
+var submitBtn = document.getElementById("submit-button");
+var highScoreArea = document.getElementById("high-scores");
 
 var questionsBank = [
   {
@@ -31,6 +33,38 @@ var timerInterval;
 
 // Actions Handlers
 startQuizButton.addEventListener("click", startQuiz);
+submitBtn.addEventListener("click", function (event) {
+  event.preventDefault();
+  var storedScores = JSON.parse(localStorage.getItem("scores"));
+
+  var highScore = {
+    initials: document.getElementById("initial-field").value.trim(),
+    score: score,
+  };
+
+  if (storedScores === null) {
+    storedScores = [highScore];
+  } else {
+    storedScores.push(highScore);
+  }
+
+  // resort storedScores based on score (highest at the top)
+  // storedScores = sortScores(storedScores);
+
+  console.log(highScore);
+  localStorage.setItem("scores", JSON.stringify(storedScores));
+  showHighScores();
+});
+
+function showHighScores() {
+  highScoreArea.innerHTML = "";
+  var storedScores = JSON.parse(localStorage.getItem("scores"));
+  for (var i = 0; i < storedScores.length; i++) {
+    var score = document.createElement("p");
+    score.textContent = storedScores[i].initials + ": " + storedScores[i].score;
+    highScoreArea.appendChild(score);
+  }
+}
 
 function timerStart() {
   timerInterval = setInterval(function () {
@@ -101,6 +135,7 @@ function showSection(sectionID) {
 function showAllDone() {
   timerStop();
   showSection("all-done");
+  showHighScores();
 }
 
 function startQuiz() {
